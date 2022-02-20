@@ -1,15 +1,26 @@
 import * as React from "react";
 import "./styles.css";
 import TimelinesChart from "timelines-chart";
+import { useEffect, useState } from "react";
 
 export default function App() {
+  const [files, setFiles] = useState("");
+  const handleChange = e => {
+    const fileReader = new FileReader();
+    fileReader.readAsText(e.target.files[0], "UTF-8");
+    fileReader.onload = e => {
+        console.log("e.target.result", e.target.result);
+        setFiles(e.target.result);
+        populateChart(files);
+    };
+  };
+
   function getRandomData(ordinal = false) {
     const NGROUPS = 6,
       MAXLINES = 15,
       MAXSEGMENTS = 20,
       MAXCATEGORIES = 20,
       MINTIME = new Date(2013, 2, 21);
-
     const nCategories = Math.ceil(Math.random() * MAXCATEGORIES),
       categoryLabels = [
         "A",
@@ -53,8 +64,6 @@ export default function App() {
         })
       );
 
-      //
-
       function getSegmentsData() {
         const nSegments = Math.ceil(Math.random() * MAXSEGMENTS),
           segMaxLength = Math.round((new Date() - MINTIME) / nSegments);
@@ -79,53 +88,28 @@ export default function App() {
     }
   }
 
-    console.log(getRandomData());
+    function populateChart(data) {
+        const chart = document.getElementById("chart");
+        chart.innerHTML = "";
+        const myChart = TimelinesChart();
+        myChart.data(data)(document.getElementById("chart"));
+    }
 
-    let existingData = [
-        {
-            "group": "Internal",
-            "data": [
-                { "label": "Christian Hand Over", "data": [{ "timeRange": ["2021-01-11", "2021-01-29"], "val": "Anne" }] },
-                { "label": "Simon Hand Over", "data": [{ "timeRange": ["2021-01-11", "2021-02-19"], "val": "Sina" }] },
-                { "label": "Hire Brisbane Developer", "data": [{ "timeRange": ["2021-03-01", "2021-03-26"], "val": "Sina,Craig" }] }
-            ]
-        },
-        {
-            "group": "DBYD",
-            "data": [
-                { "label": "XIM 6.1 (DBYD format update)", "data": [{ "timeRange": ["2021-02-22", "2021-03-05"], "val": "Craig" }] },
-                { "label": "XIM 6.1.1 (DBYD Webhook)", "data": [{ "timeRange": ["2021-03-08", "2021-03-26"], "val": "Craig" }] }
-            ]
-        },
-        {
-            "group": "Connect",
-            "data": [
-                { "label": "XIC 6 Release", "data": [{ "timeRange": ["2021-01-11", "2021-03-19"], "val": "Anne,Karen" }] },
-                { "label": "XIC SP1", "data": [{ "timeRange": ["2021-03-22", "2021-04-29"], "val": "Anne" }] },
-                { "label": "XIC External Access", "data": [{ "timeRange": ["2021-05-01", "2021-05-30"], "val": "Craig,Anne" }] }
-            ]
-        },
-        {
-            "group": "NextGen",
-            "data": [
-                { "label": "Prototype 1", "data": [{ "timeRange": ["2021-06-01", "2021-09-01"], "val": "NextGen WG" }] },
-                { "label": "MVP 1", "data": [{ "timeRange": ["2021-06-01", "2021-12-20"], "val": "Craig" }] }
-            ]
-        },
-        {
-            "group": "Misc",
-            "data": []
+    React.useEffect(() => {
+        if (files === "") {
+            var json = require('./data.json'); 
+            populateChart(json);
+        } else {
+            populateChart(JSON.parse(files));
         }
-    ];
-
-  React.useEffect(() => {
-    const myChart = TimelinesChart();
-      myChart.data(existingData)(document.getElementById("chart"));
-  }, []);
+        
+  }, [files]);
 
   return (
     <div className="App">
-      <div id="chart"></div>
+          <div id="chart"></div>
+          <br />
+          <input type="file" onChange={handleChange} />
     </div>
   );
 }
