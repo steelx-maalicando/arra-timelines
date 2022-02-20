@@ -1,7 +1,7 @@
 import * as React from "react";
 import "./styles.css";
 import TimelinesChart from "timelines-chart";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function App() {
   const [files, setFiles] = useState("");
@@ -109,7 +109,7 @@ export default function App() {
     <div className="App">
           <div id="chart"></div>
           <br />
-          <input type="file" onChange={handleChange} />
+          <input type="file" onChange={handleChange} accept="application/json"/>
     </div>
   );
 }
