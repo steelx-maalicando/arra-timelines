@@ -1,0 +1,36 @@
+[
+  {
+    "group": "Internal",
+    "data": [
+      {"label": "Christian Hand Over", "data": [{"timeRange": [ "2021-01-11", "2021-01-29" ],"val": "Anne"}]},
+      {"label": "Simon Hand Over", "data": [{"timeRange": ["2021-01-11", "2021-02-19"], "val": "Sina"}]},
+      {"label": "Hire Brisbane Developer", "data": [{"timeRange": [ "2021-03-01", "2021-03-26" ],"val": "Sina,Craig"}]} 
+    ]
+  },
+  {
+    "group": "DBYD",
+    "data": [
+      {"label": "XIM 6.1 (DBYD format update)", "data": [{"timeRange": ["2021-02-22", "2021-03-05"],"val": "Craig"}]},
+      {"label": "XIM 6.1.1 (DBYD Webhook)", "data": [{"timeRange": ["2021-03-08", "2021-03-26"],"val": "Craig"}]}
+    ]
+  },
+  {
+    "group": "Connect",
+    "data": [
+      {"label": "XIC 6 Release", "data": [{"timeRange": ["2021-01-11", "2021-03-19"],"val": "Anne,Karen"}]},
+      {"label": "XIC SP1", "data": [{"timeRange": ["2021-03-22", "2021-04-29"],"val": "Anne"}]},
+      {"label": "XIC External Access", "data": [{"timeRange": [ "2021-05-01", "2021-05-30" ], "val": "Craig,Anne" }]}
+    ]
+  },
+  {
+    "group": "NextGen",
+    "data": [
+      {"label": "Prototype 1", "data": [{"timeRange": ["2021-06-01", "2021-09-01"],"val": "NextGen WG"}]},
+      {"label": "MVP 1", "data": [{"timeRange": ["2021-06-01", "2021-12-20"],"val": "Craig"}]}
+    ]
+  },
+  {
+    "group": "Misc",
+    "data": []
+  }
+]
