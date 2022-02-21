@@ -92,7 +92,11 @@ export default function App() {
         const chart = document.getElementById("chart");
         chart.innerHTML = "";
         const myChart = TimelinesChart();
-        myChart.data(data)(document.getElementById("chart"));
+        myChart
+        .zScaleLabel('My Scale Units')
+        .zQualitative(true)
+        .dateMarker(new Date() - 365 * 24 * 60 * 60 * 1000) // Add a marker 1y ago
+        .data(data)(document.getElementById("chart"));
     }
 
     React.useEffect(() => {
